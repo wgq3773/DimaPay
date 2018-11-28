@@ -25,9 +25,7 @@ public class NotifyController {
 		log.info("异步通知参数打印：" + RequestUtils.getIpAddress(request) + "---" +RequestUtils.getRequestParamts(request));
 		
 		Map<String, String> map = RequestUtils.reqMapToMap(request);
+		//map形式接收到的异步通知数据：{order_uid=c6c3ad3029eb4c49877505f2ea97a69a, pay_price=0.02, aoid=ffefa24447b942318708561904ab5bb7, price=0.02, sign=1dd12693c4103797f8de4d5acc451ee7, order_id=c6c3ad3029eb4c49877505f2ea97a69a}
 		log.info("map形式接收到的异步通知数据：" + map);
-		
-		String streamData = RequestUtils.getStreamData(request);
-		log.info("数据流形式接收到的异步通知数据：" + streamData);
 	}
 }
