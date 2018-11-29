@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -36,8 +35,8 @@ public class NotifyController {
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = RequestUrl.NOTIFY_URL)
-	public ModelAndView receiveNotify(HttpServletRequest request, HttpServletResponse response){
-		ModelAndView mv = new ModelAndView();
+	public void receiveNotify(HttpServletRequest request, HttpServletResponse response){
+//		ModelAndView mv = new ModelAndView();
 		log.info("接收异步通知......");
 		log.info("异步通知参数打印：" + RequestUtils.getIpAddress(request) + "---" +RequestUtils.getRequestParamts(request));
 		
@@ -61,7 +60,7 @@ public class NotifyController {
 		String validateSign = DigestUtils.md5Hex(validateSignData);
 		if (!StringUtils.equals(validateSign, map.get("sign"))) {
 			log.info(orderId + ",验签失败,validateSign:" + validateSign);
-			return mv;
+//			return mv;
 		}
 		
 		String queryResult = HttpClientUtil.sendGet(queryUrl + map.get("aoid"), null);//{"status": "success"}
@@ -69,7 +68,7 @@ public class NotifyController {
 		String status = (String) jsonObject.get("status");
 		if (!StringUtils.equals(status, "success") && !StringUtils.equals(status, "payed")) {
 			log.info(orderId + ",订单状态不成功,status:" + status);
-			return mv;
+//			return mv;
 		}
 		
 		//修改订单状态
@@ -77,7 +76,7 @@ public class NotifyController {
 		jedisClientPool.hset(map.get("order_uid"), RedisKey.IF_USER_PAYED, CommonConstant.YES);
 //		jedisClientPool.expire(map.get("order_uid"),60 * 1);// 一分钟过期
 		log.info(map.get("order_uid") + ",异步通知处理成功.");
-		mv.setViewName("redirect:http://47.107.142.11:8087/contentList/");
-		return mv;
+//		mv.setViewName("redirect:http://47.107.142.11:8087/contentList/");
+//		return mv;
 	}
 }
