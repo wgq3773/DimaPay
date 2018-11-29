@@ -59,7 +59,7 @@ public class NotifyController {
 				.append(map.get("pay_price"))
 				.append(md5Key).toString();
 		String validateSign = DigestUtils.md5Hex(validateSignData);
-		if (StringUtils.equals(validateSign, map.get("sign"))) {
+		if (!StringUtils.equals(validateSign, map.get("sign"))) {
 			log.info(orderId + ",验签失败,validateSign:" + validateSign);
 			return mv;
 		}
@@ -76,7 +76,7 @@ public class NotifyController {
 		jedisClientPool.hset(map.get("order_uid"), RedisKey.USER_ORDER_STATUS + orderId, OrderStatus.SUCCESS.getStatus());
 		jedisClientPool.hset(map.get("order_uid"), RedisKey.IF_USER_PAYED, CommonConstant.YES);
 		jedisClientPool.expire(map.get("order_uid"),60 * 1);// 一分钟过期
-		mv.setViewName("forward:/contentList");
+		mv.setViewName("redirect:http://47.107.142.11:8087/contentList/");
 		return mv;
 	}
 }
