@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.dima.api.bean.Order;
 import com.dima.api.bean.PayResponse;
@@ -15,7 +15,7 @@ import com.dima.commons.utils.PropertiesUtils;
 
 public class PayServiceImpl implements PayService {
 	
-	private static Log log = LogFactory.getLog(PayServiceImpl.class);
+	private static Logger log = LoggerFactory.getLogger(PayServiceImpl.class);
 
 	@Override
 	public PayResponse pay(Order order) {

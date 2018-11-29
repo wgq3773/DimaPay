@@ -5,8 +5,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,7 +16,7 @@ import com.dima.commons.utils.RequestUtils;
 @Controller
 public class NotifyController {
 	
-	private static Log log = LogFactory.getLog(NotifyController.class);
+	private static Logger log = LoggerFactory.getLogger(NotifyController.class);
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = RequestUrl.NOTIFY_URL)

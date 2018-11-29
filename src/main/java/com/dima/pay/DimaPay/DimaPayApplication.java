@@ -1,7 +1,7 @@
 package com.dima.pay.DimaPay;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ImportResource;
 @ImportResource("classpath:applicationContext-*.xml")
 public class DimaPayApplication {
 	
-	private static Log log = LogFactory.getLog(DimaPayApplication.class);
+	private static Logger log = LoggerFactory.getLogger(DimaPayApplication.class);
 
 	public static void main(String[] args) {
 		log.info("DimaPayApplication开始启动............");
