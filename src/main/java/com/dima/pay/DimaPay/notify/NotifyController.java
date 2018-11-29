@@ -43,9 +43,17 @@ public class NotifyController {
 		String queryUrl = PropertiesUtils.getProperty(PropertiesFilePath.PAY_CHANNEL_FILE_PATH, "bufpay_order_query_url");
 		
 		Map<String, String> map = RequestUtils.reqMapToMap(request);
-		String orderId = map.get("order_id");
-		//map形式接收到的异步通知数据：{order_uid=c6c3ad3029eb4c49877505f2ea97a69a, pay_price=0.02, aoid=ffefa24447b942318708561904ab5bb7, price=0.02, sign=1dd12693c4103797f8de4d5acc451ee7, order_id=c6c3ad3029eb4c49877505f2ea97a69a}
 		log.info("map形式接收到的异步通知数据：" + map);
+		if (null == map || map.isEmpty()) {
+			log.info("异步通知数据为空.");
+			return ;
+		}
+		String orderId = map.get("order_id");
+		if (StringUtils.isBlank(orderId)) {
+			log.info("异步通知订单号为空.");
+			return ;
+		}
+		//map形式接收到的异步通知数据：{order_uid=c6c3ad3029eb4c49877505f2ea97a69a, pay_price=0.02, aoid=ffefa24447b942318708561904ab5bb7, price=0.02, sign=1dd12693c4103797f8de4d5acc451ee7, order_id=c6c3ad3029eb4c49877505f2ea97a69a}
 		
 		// 验签
 		//aoid + order_id + order_uid + price + pay_price + app secret
