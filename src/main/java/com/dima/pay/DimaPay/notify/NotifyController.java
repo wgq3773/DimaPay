@@ -75,7 +75,8 @@ public class NotifyController {
 		//修改订单状态
 		jedisClientPool.hset(map.get("order_uid"), RedisKey.USER_ORDER_STATUS + orderId, OrderStatus.SUCCESS.getStatus());
 		jedisClientPool.hset(map.get("order_uid"), RedisKey.IF_USER_PAYED, CommonConstant.YES);
-		jedisClientPool.expire(map.get("order_uid"),60 * 1);// 一分钟过期
+//		jedisClientPool.expire(map.get("order_uid"),60 * 1);// 一分钟过期
+		log.info(map.get("order_uid") + ",异步通知处理成功.");
 		mv.setViewName("redirect:http://47.107.142.11:8087/contentList/");
 		return mv;
 	}
