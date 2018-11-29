@@ -16,7 +16,7 @@ public class ReturnController {
 	@RequestMapping(value = RequestUrl.RETURN_URL)
 	public ModelAndView receiveRetrun(){
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("forward:/contentList");
+		mv.setViewName("redirect:http://47.107.142.11:8087/contentList/");
 		return mv;
 	}
 }
