@@ -67,7 +67,7 @@ public class NotifyController {
 		String queryResult = HttpClientUtil.sendGet(queryUrl + map.get("aoid"), null);//{"status": "success"}
 		JSONObject jsonObject = (JSONObject) JSON.parse(queryResult);
 		String status = (String) jsonObject.get("status");
-		if (!StringUtils.equals(status, "success")) {
+		if (!StringUtils.equals(status, "success") && !StringUtils.equals(status, "payed")) {
 			log.info(orderId + ",订单状态不成功,status:" + status);
 			return mv;
 		}
